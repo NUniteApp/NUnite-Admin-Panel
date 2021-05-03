@@ -5,7 +5,7 @@ This is the README file for the NUnite Admin Panel!
 The GitHub Repository Link: https://github.com/NUniteApp/NUnite-Admin-Panel.git
 
 
-**How to access the NUnite Admin Panel: **
+**How to access the NUnite Admin Panel:**
 
 The admin panel is hosted on numyspace. 
 Here is the link: http://unn-w18013561.newnumyspace.co.uk/NUnite/login.php
