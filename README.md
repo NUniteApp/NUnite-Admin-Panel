@@ -11,7 +11,9 @@ The admin panel is hosted on numyspace.
 Here is the link: http://unn-w18013561.newnumyspace.co.uk/NUnite/login.php
 
 Login Details: 
+
 Email: rajan.makh@nunite.co.uk
+
 Password: password
 
 Once you login, the system should take you to the Admin Dashboard.
