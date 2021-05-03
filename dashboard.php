@@ -8,7 +8,11 @@
     <meta charset="UTF-8">
     <title>NUnite Admin Dashboard</title>
     <link rel="stylesheet" type="text/css" href="styles/dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.css" integrity="sha512-3icgkoIO5qm2D4bGSUkPqeQ96LS8+ukJC7Eqhl1H5B2OJMEnFqLmNDxXVmtV/eq5M65tTDkUYS/Q0P4gvZv+yA==" crossorigin="anonymous" /></head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.css"
+          integrity="sha512-3icgkoIO5qm2D4bGSUkPqeQ96LS8+ukJC7Eqhl1H5B2OJMEnFqLmNDxXVmtV/eq5M65tTDkUYS/Q0P4gvZv+yA=="
+          crossorigin="anonymous"/>
+</head>
 <body>
 
 <div class="wrapper hover_collapse">
@@ -17,15 +21,19 @@
     <div class="top_navbar">
         <div class="logo">
             <div class="toggle-menu">
-                <button> <img src="images/NUnite_Logo.png" class="nunite-logo" alt="NUnite Logo" width="40" height="50"> </button>
+                <button><img src="images/NUnite_Logo.png" class="nunite-logo" alt="NUnite Logo" width="40" height="50">
+                </button>
             </div>
         </div>
 
         <div class="navbar">
-            <a href="#">Reports</a>
-            <a href="#">Messages</a>
+            <a
+            <button class="refresh" onClick="window.location.reload();"><i class="fa fa-refresh fa-spin"></i> Refresh
+            </button>
+            <a href="reports.php">Reports</a>
+            <a href="messages.php">Messages</a>
             <div class="dropdown">
-                <button class="dropbtn"><i class="fa fa-user"></i> Rajan Makh <i class="fa fa-caret-down"></i></button>
+                <button class="dropbtn"><i class="fa fa-user"></i> NUnite Admin <i class="fa fa-caret-down"></i></button>
                 <div class="dropdown-content">
                     <a href="#">Settings</a>
                     <a href="login.php">Log Out</a>
@@ -84,43 +92,108 @@
         <br>
 
         <div class="row">
+
             <div class="column">
                 <div class="card">
                     <div class="analytics">
-                    <p><i class="fa fa-user"></i> 17 </p>
+
+                        <?php //Call
+                        $myData = file_get_contents("https://nunite.xyz/assessment-backend/api/total_users");
+                        $myObject = json_decode($myData);
+                        $myObjectMap = $myObject->data;
+                        ?>
+                        <p>
+                            <i class="fa fa-users"> </i>
+                            <?php foreach ($myObjectMap as $key => $item): //Display
+                                echo $item->totalusers;
+                            endforeach; ?>
+                        </p>
+
                     </div>
                     <hr>
-                    <h1>Users Online</h1>
+                    <div class="cardTitle">
+                        <a href="manageMembers.php">
+                            <h1>Total Users</h1>
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <div class="column">
                 <div class="card">
                     <div class="analytics">
-                        <p><i class="fa fa-users"></i> 78 </p>
+
+                        <?php //Call
+                        $myData = file_get_contents("https://nunite.xyz/assessment-backend/api/total_posts");
+                        $myObject = json_decode($myData);
+                        $myObjectMap = $myObject->data;
+                        ?>
+                        <p>
+                            <i class="fa fa-file-alt"> </i>
+                            <?php foreach ($myObjectMap as $key => $item): //Display
+                                echo $item->totalposts;
+                            endforeach; ?>
+                        </p>
+
                     </div>
                     <hr>
-                    <h1>Total Users</h1>
+                    <div class="cardTitle">
+                        <a href="managePosts.php">
+                            <h1>Total Posts</h1>
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <div class="column">
                 <div class="card">
                     <div class="analytics">
-                        <p><i class="fas fa-file-alt"></i> 53 </p>
+
+                        <?php //Call
+                        $myData = file_get_contents("https://nunite.xyz/assessment-backend/api/total_reports");
+                        $myObject = json_decode($myData);
+                        $myObjectMap = $myObject->data;
+                        ?>
+                        <p>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <?php foreach ($myObjectMap as $key => $item): //Display
+                                echo $item->totalreports;
+                            endforeach; ?>
+                        </p>
+
                     </div>
                     <hr>
-                    <h1>New Posts</h1>
+                    <div class="cardTitle">
+                        <a href="reports.php">
+                            <h1>New Reports</h1>
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <div class="column">
                 <div class="card">
                     <div class="analytics">
-                        <p><i class="fa fa-file"></i> 274 </p>
+
+                        <?php //Call
+                        $myData = file_get_contents("https://nunite.xyz/assessment-backend/api/total_requests");
+                        $myObject = json_decode($myData);
+                        $myObjectMap = $myObject->data;
+                        ?>
+                        <p>
+                            <i class="fas fa-envelope"></i>
+                            <?php foreach ($myObjectMap as $key => $item): //Display
+                                echo $item->totalrequests;
+                            endforeach; ?>
+                        </p>
+
                     </div>
                     <hr>
-                    <h1>Total Posts</h1>
+                    <div class="cardTitle">
+                        <a href="contactUsRequests.php">
+                            <h1>Contact Requests</h1>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -133,37 +206,7 @@
 </div>
 
 <!-- Javascript Side Bar Animation-->
-<script>
-    var li_items = document.querySelectorAll(".sidebar ul li");
-    var toggle_menu = document.querySelector(".toggle-menu");
-    var wrapper = document.querySelector(".wrapper");
-
-
-    li_items.forEach((li_item)=>{
-        li_item.addEventListener("mouseenter", ()=>{
-            if(wrapper.classList.contains("click_collapse")){
-            }
-            else{
-                li_item.closest(".wrapper").classList.remove("hover_collapse");
-            }
-        })
-    });
-
-    li_items.forEach((li_item)=>{
-        li_item.addEventListener("mouseleave", ()=>{
-            if(wrapper.classList.contains("click_collapse")){
-            }
-            else{
-                li_item.closest(".wrapper").classList.add("hover_collapse");
-            }
-        })
-    });
-
-    toggle_menu.addEventListener("click", () => {
-        toggle_menu.closest(".wrapper").classList.toggle("click_collapse");
-        toggle_menu.closest(".wrapper").classList.toggle("hover_collapse");
-    })
-</script>
+<script src="sidebarAnimation.js"></script>
 
 </body>
 </html>

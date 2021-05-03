@@ -83,15 +83,15 @@
 
     <!-- Main Content -->
     <div class="main_container">
-        <h1>Admin Guidance</h1>
+        <h1>Messages</h1>
         <br>
+        <p>This is a representation of the Messaging System. Due to time constraints, we were unable to complete this.</p>
 
-        <center>
-            <div class="guidance">
-                <h1>Admin Policy Procedure Document</h1>
-                <iframe src="documentation/NUnite%20Admin%20Policy%20Procedure%20Sheet.pdf" width="1200px" height="800px"></iframe>
+        <div class="container">
+            <div class="design-demo">
+                <center><img src="images/design/messages.png" alt="admin" width="100%" height="80%"></center>
             </div>
-        </center>
+        </div>
     </div>
 </div>
 

@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="styles/dashboard.css">
     <link rel="stylesheet" type="text/css" href="styles/manage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.css" integrity="sha512-3icgkoIO5qm2D4bGSUkPqeQ96LS8+ukJC7Eqhl1H5B2OJMEnFqLmNDxXVmtV/eq5M65tTDkUYS/Q0P4gvZv+yA==" crossorigin="anonymous" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
@@ -25,10 +26,11 @@
         </div>
 
         <div class="navbar">
-            <a href="#">Reports</a>
-            <a href="#">Messages</a>
+            <a <button class="refresh" onClick="window.location.reload();"> <i class="fa fa-refresh fa-spin"></i> Refresh</button>
+            <a href="reports.php">Reports</a>
+            <a href="messages.php">Messages</a>
             <div class="dropdown">
-                <button class="dropbtn"><i class="fa fa-user"></i> Rajan Makh <i class="fa fa-caret-down"></i></button>
+                <button class="dropbtn"><i class="fa fa-user"></i> NUnite Admin <i class="fa fa-caret-down"></i></button>
                 <div class="dropdown-content">
                     <a href="#">Settings</a>
                     <a href="login.php">Log Out</a>
@@ -85,90 +87,107 @@
     <div class="main_container">
         <h1>Manage Posts</h1>
         <br>
+        <h2 id="message"></h2>
+        <br>
 
         <div class="container">
-            <?php
-            $myData = file_get_contents("http://unn-w18013561.newnumyspace.co.uk/nunite_api/api/admin_posts");
-            $myObject = json_decode($myData);
-            $myObjectMap = $myObject->data;
-            ?>
                 <script>
                     // Make a request for a user with a given ID
-                    axios.get('http://unn-w18013561.newnumyspace.co.uk/nunite_api/api/admin_posts')
+                    axios.get('https://nunite.xyz/assessment-backend/api/admin_posts')
                         .then(function (response) {
                             // handle success
                             console.log(response.data.data);
+
+                            if (response.data.data === null) return;
+                            let apiData = response.data.data;
+                            apiData.map((data, i) => {
+                                let dataRow = document.createElement("tr");
+                                dataRow.setAttribute('id', 'posts-' + i);
+                                document.getElementById("dataTable").appendChild(dataRow);
+
+                                //Loops Through JSON Objects
+                                let post_id;
+                                Object.keys(data).forEach((key, k, objArray) => {
+                                    console.log(key + ' - ' + data[key]) // key - value
+                                    let rowCol = document.createElement('td');
+                                    rowCol.innerText = data[key];
+                                    document.getElementById('posts-' + i).appendChild(rowCol);
+
+                                   if(key === 'post_id') {
+                                       post_id = data[key];
+                                   }
+
+                                    if(k === objArray.length - 1) {
+                                        let rowCol = document.createElement('td');
+                                        document.getElementById('posts-' + i).appendChild(rowCol);
+
+                                        let btnCol1 = document.createElement("button");
+                                        btnCol1.innerHTML = "MESSAGE";
+                                        btnCol1.setAttribute("onclick", "messageUser(" + post_id + ")");
+                                        rowCol.appendChild(btnCol1);
+                                        btnCol1.className = "messageButton";
+
+                                        btnCol1.onclick = function () {
+                                            location.href = "newMessage.php";
+                                        };
+
+                                        let btnCol = document.createElement("button");
+                                        btnCol.innerHTML = "DELETE";
+                                        btnCol.setAttribute("onclick", "deletePost(" + post_id + ")");
+                                        rowCol.appendChild(btnCol);
+                                        btnCol.className = "deleteButton";
+
+                                    }
+
+                                })
+                            });
                         })
                         .catch(function (error) {
-                            // handle error
-                            console.log(error);
+                            document.getElementById("message").innerHTML = err.name;
                         })
                         .then(function () {
-                            // always executed
                         });
-                </script>
-            <table>
 
+                        const deletePost = async (post_id) => {
+                            let postData = {
+                                post_id: post_id
+                            }
+                            let resDel = await axios.post('https://nunite.xyz/assessment-backend/api/delete_post',
+                                postData );
+                            console.log(resDel);
+                            document.getElementById("message").innerHTML = "Success! The Post Has Been Deleted";
+                            document.getElementById("message2").innerHTML = "Refresh The Page To See The Changes Applied.";
+                        }
+                </script>
+
+            <table>
                 <thead>
                 <tr>
                     <th>User Id</th>
                     <th>Username</th>
                     <th>Post Id</th>
                     <th>Post Title</th>
-                    <th>Time and Date</th>
+                    <th>Post Description</th>
+                    <th>Time & Date</th>
+                    <th style="color: limegreen">Actions</th>
                 </tr>
                 </thead>
 
-                <tbody>
-                <?php foreach($myObjectMap as $key => $item): ?>
-                    <tr>
-                        <td><?PHP echo $item->user_id; ?></td>
-                        <td><?PHP echo $item->username; ?></td>
-                        <td><?PHP echo $item->post_id; ?></td>
-                        <td><?PHP echo $item->post_title; ?></td>
-                        <td><?PHP echo $item->post_date; ?></td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
+                <tbody id="dataTable">
 
+                </tbody>
             </table>
+
+            <br>
+            <h2 id="message2"></h2>
+
         </div>
 
     </div>
 </div>
 
 <!-- Javascript Side Bar Animation-->
-<script>
-    var li_items = document.querySelectorAll(".sidebar ul li");
-    var toggle_menu = document.querySelector(".toggle-menu");
-    var wrapper = document.querySelector(".wrapper");
-
-
-    li_items.forEach((li_item)=>{
-        li_item.addEventListener("mouseenter", ()=>{
-            if(wrapper.classList.contains("click_collapse")){
-            }
-            else{
-                li_item.closest(".wrapper").classList.remove("hover_collapse");
-            }
-        })
-    });
-
-    li_items.forEach((li_item)=>{
-        li_item.addEventListener("mouseleave", ()=>{
-            if(wrapper.classList.contains("click_collapse")){
-            }
-            else{
-                li_item.closest(".wrapper").classList.add("hover_collapse");
-            }
-        })
-    });
-
-    toggle_menu.addEventListener("click", () => {
-        toggle_menu.closest(".wrapper").classList.toggle("click_collapse");
-        toggle_menu.closest(".wrapper").classList.toggle("hover_collapse");
-    })
-</script>
+<script src="sidebarAnimation.js"></script>
 
 </body>
 </html>

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/NUnite-Admin-Panel.iml" filepath="$PROJECT_DIR$/.idea/NUnite-Admin-Panel.iml" />
       <module fileurl="file://$PROJECT_DIR$/../NUnite-Backend/.idea/NUnite-Backend.iml" filepath="$PROJECT_DIR$/../NUnite-Backend/.idea/NUnite-Backend.iml" />
+      <module fileurl="file://$USER_HOME$/Desktop/Work/University Work/Computer Science/Year 3/Individual Computing Project/Project/Surveyual/.idea/Surveyual.iml" filepath="$USER_HOME$/Desktop/Work/University Work/Computer Science/Year 3/Individual Computing Project/Project/Surveyual/.idea/Surveyual.iml" />
     </modules>
   </component>
 </project>

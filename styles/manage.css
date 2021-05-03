@@ -1,8 +1,178 @@
 table, th, td {
-    border: 1px solid black;
+    border: 3px solid black;
+    padding: 10px;
+    transition: all 0.4s ease;
+    width: 20%;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
 }
+
+th {
+    background: #3d4040;
+    color: white;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+td {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+td:hover {
+    background-color: #DEDEDE;
+}
+
+.editButton {
+    background-color: green;
+    border: 2px solid black;
+    color: white;
+    padding: 5px 41px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.editButton:hover {
+    background: #3d4040;
+}
+
+.deleteButton {
+    background-color: rgba(167,40,44,0.98);
+    border: 2px solid black;
+    color: white;
+    padding: 5px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.deleteButton:hover {
+    background: #3d4040;
+}
+
+.banButton {
+    background-color: rgba(167,40,44,0.98);
+    border: 2px solid black;
+    color: white;
+    padding: 5px 43px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.banButton:hover {
+    background: #3d4040;
+}
+
+.messageButton {
+    background-color: rgba(211,182,51,0.98);
+    border: 2px solid black;
+    color: white;
+    padding: 5px 23px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.messageButton:hover {
+    background: #3d4040;
+}
+
+.addButton {
+    background-color: green;
+    border: 2px solid black;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.addButton:hover {
+    background: #3d4040;
+}
+
+.sponsorForm {
+    background-color: lightgrey;
+    border: 3px solid black;
+    padding: 30px;
+    color: black;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+}
+
+
+.sponsorForm label {
+    padding-bottom: 50px;
+}
+
+.sponsorForm input {
+    background: white;
+    border: 2px solid black;
+    padding: 15px 50px;
+    transition-duration: 1s;
+    text-decoration: none;
+}
+
+.sponsorForm input[type="text"] {
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+.sponsorForm input[type="submit"] {
+    font-size: 14px;
+}
+
+.sponsorForm input:hover {
+    background: #3d4040;
+    color: white;
+}
+
+.sponsorForm button {
+    background: white;
+    border: 2px solid black;
+    padding: 15px 50px;
+    transition-duration: 1s;
+    text-decoration: none;
+}
+
+.sponsorForm button:hover {
+    background: #3d4040;
+    color: white;
+}
+
+
+
+
+
+
+
+

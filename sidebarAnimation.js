@@ -28,4 +28,4 @@ li_items.forEach((li_item)=>{
 toggle_menu.addEventListener("click", () => {
     toggle_menu.closest(".wrapper").classList.toggle("click_collapse");
     toggle_menu.closest(".wrapper").classList.toggle("hover_collapse");
-});
+})

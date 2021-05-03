@@ -88,7 +88,7 @@
 
     <!-- Main Content -->
     <div class="main_container">
-        <h1>Manage Members</h1>
+        <h1>Reports</h1>
         <br>
         <h2 id="message"></h2>
         <br>
@@ -96,7 +96,7 @@
         <div class="container">
             <script>
                 // Make a request for a user with a given ID
-                axios.get('https://nunite.xyz/assessment-backend/api/admin_users')
+                axios.get('https://nunite.xyz/assessment-backend/api/admin_reported_posts')
                     .then(function (response) {
                         // handle success
                         console.log(response.data.data);
@@ -105,34 +105,28 @@
                         let apiData = response.data.data;
                         apiData.map((data, i) => {
                             let dataRow = document.createElement("tr");
-                            dataRow.setAttribute('id', 'users-' + i);
+                            dataRow.setAttribute('id', 'posts-' + i);
                             document.getElementById("dataTable").appendChild(dataRow);
 
                             //Loops Through JSON Objects
-                            let user_id;
+                            let post_id;
                             Object.keys(data).forEach((key, k, objArray) => {
                                 console.log(key + ' - ' + data[key]) // key - value
                                 let rowCol = document.createElement('td');
                                 rowCol.innerText = data[key];
-                                document.getElementById('users-' + i).appendChild(rowCol);
+                                document.getElementById('posts-' + i).appendChild(rowCol);
 
-                                if (key === 'user_id') {
-                                    user_id = data[key];
+                                if(key === 'post_id') {
+                                    post_id = data[key];
                                 }
 
-                                if (k === objArray.length - 1) {
+                                if(k === objArray.length - 1) {
                                     let rowCol = document.createElement('td');
-                                    document.getElementById('users-' + i).appendChild(rowCol);
-
-                                    let btnCol3 = document.createElement("button");
-                                    btnCol3.innerHTML = "EDIT";
-                                    btnCol3.setAttribute("onclick", "editUser(" + user_id + ")");
-                                    rowCol.appendChild(btnCol3);
-                                    btnCol3.className = "editButton";
+                                    document.getElementById('posts-' + i).appendChild(rowCol);
 
                                     let btnCol1 = document.createElement("button");
                                     btnCol1.innerHTML = "MESSAGE";
-                                    btnCol1.setAttribute("onclick", "messageUser(" + user_id + ")");
+                                    btnCol1.setAttribute("onclick", "messageUser(" + post_id + ")");
                                     rowCol.appendChild(btnCol1);
                                     btnCol1.className = "messageButton";
 
@@ -142,13 +136,13 @@
 
                                     let btnCol = document.createElement("button");
                                     btnCol.innerHTML = "DELETE";
-                                    btnCol.setAttribute("onclick", "deleteUser(" + user_id + ")");
+                                    btnCol.setAttribute("onclick", "deleteReportedPost(" + post_id + ")");
                                     rowCol.appendChild(btnCol);
                                     btnCol.className = "deleteButton";
 
                                     let btnCol2 = document.createElement("button");
                                     btnCol2.innerHTML = "BAN";
-                                    btnCol2.setAttribute("onclick", "banUser(" + user_id + ")");
+                                    btnCol2.setAttribute("onclick", "banUser(" + post_id + ")");
                                     rowCol.appendChild(btnCol2);
                                     btnCol2.className = "banButton";
 
@@ -157,37 +151,38 @@
                                     };
                                 }
 
-                            })
+                            });
+
                         });
                     })
                     .catch(function (error) {
                         document.getElementById("message").innerHTML = err.name;
-                        console.log(error);
                     })
                     .then(function () {
-                        // always executed
                     });
 
-                const deleteUser = async (user_id) => {
+                const deleteReportedPost = async (post_id) => {
                     let postData = {
-                        user_id: user_id
+                        post_id: post_id
                     }
-                    let resDel = await axios.post('https://nunite.xyz/assessment-backend/api/delete_user',
-                        postData);
+                    let resDel = await axios.post('https://nunite.xyz/assessment-backend/api/delete_post',
+                        postData );
                     console.log(resDel);
-                    document.getElementById("message").innerHTML = "Success! The User Has Been Removed From NUnite";
+                    document.getElementById("message").innerHTML = "Success! The Post Has Been Deleted";
                     document.getElementById("message2").innerHTML = "Refresh The Page To See The Changes Applied.";
                 }
-              </script>
 
-
+            </script>
 
             <table>
                 <thead>
                 <tr>
-                    <th>User Id</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Report Id</th>
+                    <th>Report Title</th>
+                    <th>Report Text</th>
+                    <th>PostId</th>
+                    <th>Post Title</th>
+                    <th>Post Description</th>
                     <th>Username</th>
                     <th>Email</th>
                     <th style="color: limegreen">Actions</th>
