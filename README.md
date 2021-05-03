@@ -10,10 +10,8 @@ The GitHub Repository Link: https://github.com/NUniteApp/NUnite-Admin-Panel.git
 The admin panel is hosted on numyspace. 
 Here is the link: http://unn-w18013561.newnumyspace.co.uk/NUnite/login.php
 
-Login Details: 
-
+**Login Details:**
 Email: rajan.makh@nunite.co.uk
-
 Password: password
 
 Once you login, the system should take you to the Admin Dashboard.
